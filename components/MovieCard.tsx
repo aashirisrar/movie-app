@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { SafeUser } from "@/types";
 import { Movie } from "@prisma/client";
 import { BsFillPlayFill } from "react-icons/bs";
@@ -11,6 +12,8 @@ interface MovieCardProps {
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie, currentUser }) => {
+  const router = useRouter();
+
   return (
     <div className="group bg-zinc-900 col-span relative h-[12vw]">
       <Image
@@ -32,7 +35,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, currentUser }) => {
           <div className="flex flex-row items-center gap-3">
             <div
               className="cursor-pointer h-6 w-6 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center items-center transition hover:bg-neutral-300"
-              onClick={() => {}}
+              onClick={() => router.push(`/watch/${movie?.id}`)}
             >
               <BsFillPlayFill size={30} />
             </div>
