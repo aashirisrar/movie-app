@@ -45,11 +45,17 @@ const SignIn = () => {
   }, [email, password]);
 
   return (
-    <div className="relative w-full  bg-no-repeat bg-center bg-cover bg-fixed">
+    <div className="relative h-full w-full bg-[url('/images/bg.jpg')] bg-no-repeat bg-center bg-cover bg-fixed">
       <div className="bg-black w-full h-full lg:bg-opacity-50">
-        {/* <nav className="px-12 py-5 ">
-          <Image src="/images/logo.png" alt="logo" fill className="h-12" />
-        </nav> */}
+        <nav className="px-12 py-5 ">
+          <Image
+            src="/images/logo.png"
+            alt="logo"
+            height={100}
+            width={100}
+            className="h-12"
+          />
+        </nav>
         <div className="flex justify-center">
           <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
             <h2 className="text-white text-4xl mb-8 font-semibold">

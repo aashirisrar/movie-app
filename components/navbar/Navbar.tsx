@@ -1,5 +1,6 @@
 "use client";
 
+import { SafeUser } from "@/types";
 import { useCallback, useEffect, useState } from "react";
 import { BsBell, BsChevronDown, BsSearch } from "react-icons/bs";
 import Image from "next/image";
@@ -11,7 +12,11 @@ import AccountMenu from "@/components/navbar/AccountMenu";
 
 const TOP_OFFSET = 66;
 
-const Navbar = () => {
+interface NavbarProps {
+  currentUser: SafeUser | null;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
@@ -89,7 +94,7 @@ const Navbar = () => {
                 showAccountMenu ? "rotate-180" : "rotate-0"
               }`}
             />
-            <AccountMenu visible={showAccountMenu} />
+            <AccountMenu currentUser={currentUser} visible={showAccountMenu} />
           </div>
         </div>
       </div>

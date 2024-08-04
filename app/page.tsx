@@ -17,7 +17,7 @@ export default async function Home() {
   return (
     <>
       <InfoModalComponent />
-      <Navbar />
+      <Navbar currentUser={currentUser} />
       <Billboard movie={randomMovie} />
       <div className="pb-40">
         <MovieList

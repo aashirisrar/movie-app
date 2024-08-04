@@ -3,11 +3,14 @@
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 
+import { SafeUser } from "@/types";
+
 interface AccountMenuProps {
   visible?: boolean;
+  currentUser: SafeUser | null;
 }
 
-const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
+const AccountMenu: React.FC<AccountMenuProps> = ({ visible, currentUser }) => {
   if (!visible) return null;
 
   return (
@@ -21,7 +24,9 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
             className="w-8 rounded-md"
             src="/images/placeholder.png"
           />
-          <p className="text-white text-sm group-hover/item:underline">user</p>
+          <p className="text-white text-sm group-hover/item:underline">
+            {currentUser?.name}
+          </p>
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />
         <div
