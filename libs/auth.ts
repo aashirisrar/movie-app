@@ -8,7 +8,7 @@ import authConfig from "@/libs/auth.config"
 export const { handlers, auth, signIn, signOut } = NextAuth({
     adapter: PrismaAdapter(prisma),
     pages: {
-        signIn: '/'
+        signIn: '/sign-in'
     },
     debug: process.env.NODE_ENV === 'development',
     session: {

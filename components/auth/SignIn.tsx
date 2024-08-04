@@ -1,11 +1,16 @@
 "use client";
 
+import axios from "axios";
 import { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import Input from "@/components/inputs/Input";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -16,12 +21,39 @@ const SignIn = () => {
     setVariant((value) => (value === "Login" ? "Register" : "Login"));
   }, []);
 
+  const register = useCallback(async () => {
+    try {
+      await axios.post("/api/register", { email, name, password });
+      toast.success("Success");
+    } catch (error: any) {
+      console.log(error);
+      toast.error("Something went wrong.");
+    }
+  }, [email, name, password]);
+
+  const login = useCallback(async () => {
+    try {
+      await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+        callbackUrl: "/",
+      });
+
+      toast.success("Success");
+      router.push("/");
+    } catch (error: any) {
+      console.log(error);
+      toast.error("Invalid Credentials.");
+    }
+  }, [email, password]);
+
   return (
-    <div className="relative w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-cover bg-fixed">
+    <div className="relative w-full  bg-no-repeat bg-center bg-cover bg-fixed">
       <div className="bg-black w-full h-full lg:bg-opacity-50">
-        <nav className="px-12 py-5 ">
+        {/* <nav className="px-12 py-5 ">
           <Image src="/images/logo.png" alt="logo" fill className="h-12" />
-        </nav>
+        </nav> */}
         <div className="flex justify-center">
           <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
             <h2 className="text-white text-4xl mb-8 font-semibold">
@@ -57,7 +89,10 @@ const SignIn = () => {
                 value={password}
               />
             </div>
-            <button className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition">
+            <button
+              onClick={variant === "Login" ? login : register}
+              className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
+            >
               {variant === "Login" ? "Login" : "Sign Up"}
             </button>
             <p className="text-neutral-500 mt-12">
