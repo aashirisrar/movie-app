@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import Input from "@/components/inputs/Input";
@@ -10,7 +9,6 @@ import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 
 const SignIn = () => {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -36,12 +34,10 @@ const SignIn = () => {
       await signIn("credentials", {
         email,
         password,
-        redirect: false,
-        callbackUrl: "/",
+        callbackUrl: "/profiles",
       });
 
       toast.success("Success");
-      router.push("/");
     } catch (error: any) {
       console.log(error);
       toast.error("Invalid Credentials.");
