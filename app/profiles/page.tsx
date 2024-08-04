@@ -5,6 +5,13 @@ import ProfileAvatarComponent from "@/components/profiles/ProfileAvatarComponent
 const ProfiesPage = async () => {
   const currentUser = await getCurrentUser();
 
+  if (!currentUser)
+    return (
+      <div className="text-white flex justify-center items-center h-full">
+        Not logged In
+      </div>
+    );
+
   return (
     <div className="flex items-center h-full justify-center">
       <div className="flex flex-col">

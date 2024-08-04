@@ -14,6 +14,13 @@ export default async function Home() {
   const currentUser = await getCurrentUser();
   const favorites = await getFavoriteMovies();
 
+  if (!currentUser)
+    return (
+      <div className="text-white flex justify-center items-center h-full">
+        Not logged In
+      </div>
+    );
+
   return (
     <>
       <InfoModalComponent />
