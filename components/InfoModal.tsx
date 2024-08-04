@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -15,7 +16,7 @@ interface InfoModalProps {
 const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!visible);
 
-  const { movieId } = useInfoModal();
+  const { movie } = useInfoModal();
 
   useEffect(() => {
     setIsVisible(!!visible);
@@ -49,26 +50,26 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
             ></video>
             <div
               className="cursor-pointer absolute top-3 right-3 h-10 w-10 rounded-full bg-black bg-opacity-70 flex items-center justify-center"
-              onClick={() => handleClose}
+              onClick={handleClose}
             >
               <AiOutlineClose size={20} className="text-white" />
             </div>
 
-            <div className="aboslute bottom-[10%] left-10">
+            <div className="absolute bottom-[10%] left-10">
               <p className="text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-8">
-                {movie?.id}
+                {movie?.title}
               </p>
-              <div className="flex flex-col gap-4 items-center">
+              <div className="flex flex-row gap-4 items-center">
                 <PlayButton movieId={movie?.id} />
-                <FavoriteButton listingId={movie?.id} />
+                <FavoriteButton listingId={movie?.id!} />
               </div>
             </div>
           </div>
           <div className="px-12 py-8">
             <p className="text-green-400 font-semibold text-lg">
               New <p className="text-white text-lg">{movie?.duration}</p>
-              New <p className="text-white text-lg">{movie?.genre}</p>
-              New <p className="text-white text-lg">{movie?.description}</p>
+              <p className="text-white text-lg">{movie?.genre}</p>
+              <p className="text-white text-lg">{movie?.description}</p>
             </p>
           </div>
         </div>

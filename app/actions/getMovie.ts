@@ -1,6 +1,4 @@
-
 import prisma from '@/libs/prisma'
-import { getCurrentUser } from "./getCurrentUser"
 
 interface IParams {
     movieId?: string
@@ -8,10 +6,6 @@ interface IParams {
 
 export async function getMovie(params: IParams) {
     try {
-        const currentUser = await getCurrentUser();
-
-        if (!currentUser) return null
-
         const { movieId } = params
 
         if (!movieId) return null
@@ -21,6 +15,7 @@ export async function getMovie(params: IParams) {
                 id: movieId
             }
         })
+
 
         if (!movies) return null
 

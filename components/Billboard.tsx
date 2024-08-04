@@ -2,10 +2,10 @@
 
 import { Movie } from "@prisma/client";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-
-import PlayButton from "@/components/PlayButton";
 import { useCallback } from "react";
+
 import useInfoModal from "@/app/hooks/useInfoModal";
+import PlayButton from "@/components/PlayButton";
 
 interface BillboardProps {
   movie: Movie | null;
@@ -13,9 +13,11 @@ interface BillboardProps {
 
 const Billboard: React.FC<BillboardProps> = ({ movie }) => {
   const { onOpen } = useInfoModal();
+
   const handleOpenModal = useCallback(() => {
     onOpen(movie?.id!);
   }, [onOpen, movie?.id]);
+
   return (
     <div className="relative h-[56.25vw]">
       <video
