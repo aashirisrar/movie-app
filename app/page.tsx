@@ -6,6 +6,7 @@ import getFavoriteMovies from "@/app//actions/getFavoriteMovies";
 import Billboard from "@/components/Billboard";
 import Navbar from "@/components/navbar/Navbar";
 import MovieList from "@/components/MovieList";
+import InfoModal from "@/components/InfoModal";
 
 export default async function Home() {
   const randomMovie = await getRandomMovie();
@@ -15,6 +16,7 @@ export default async function Home() {
 
   return (
     <>
+      <InfoModal />
       <Navbar />
       <Billboard movie={randomMovie} />
       <div className="pb-40">

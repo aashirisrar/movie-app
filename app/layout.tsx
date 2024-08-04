@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import ToasterProvider from "@/app/providers/ToasterProvider";
-import { getCurrentUser } from "@/app/actions/getCurrentUser";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +16,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const currentUser = await getCurrentUser();
-
   return (
     <html lang="en">
       <body className={inter.className}>
