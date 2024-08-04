@@ -2,13 +2,21 @@
 
 import { Movie } from "@prisma/client";
 import MovieCard from "./MovieCard";
+import { SafeUser } from "@/types";
 
 interface MovieListProps {
   movies: Movie[] | [];
+  currentUser: SafeUser | null;
   title: string;
 }
 
-const MovieList: React.FC<MovieListProps> = ({ title, movies }) => {
+const MovieList: React.FC<MovieListProps> = ({
+  title,
+  movies,
+  currentUser,
+}) => {
+  if (movies.length === 0) return null;
+
   return (
     <div className="px-4 md:px-12 mt-4 space-y-8">
       <div>
@@ -17,7 +25,7 @@ const MovieList: React.FC<MovieListProps> = ({ title, movies }) => {
         </p>
         <div className="grid grid-cols-4 gap-2">
           {movies?.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
+            <MovieCard key={movie.id} movie={movie} currentUser={currentUser} />
           ))}
         </div>
       </div>
